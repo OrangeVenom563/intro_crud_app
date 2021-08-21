@@ -1,0 +1,37 @@
+.header{
+    height:70px;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    margin: 25px 0px;
+}
+
+.AppName{
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.logo-container{
+    width: 70px;
+    height: 70px;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.options{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.option{
+    padding: 10px 15px;
+}
+
+a{
+    color:black;
+    text-decoration: none;    
+}
