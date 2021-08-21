@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { Button, Card, InputGroup } from "react-bootstrap";
 
+import EditForm from "../../components/edit-form/edit-from.component";
+
 const API_URL = "https://jsonplaceholder.typicode.com";
 const API_POST = API_URL + "/posts";
 const API_USERS = API_URL + "/users";
@@ -123,69 +125,44 @@ class PostApp extends React.Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <label> UserName : </label>
-          <select>
-            {this.userDetails.map((detail) => {
-              return <option>{detail.name}</option>;
-            })}
-          </select>
-          <label> UserID : </label>
-          <input
-            type="number"
-            name="userId"
-            value={this.state.userId}
-            onChange={this.handleChange}
-          />
-          <label> Title : </label>
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-          <label> Body : </label>
-          <input
-            type="text"
-            name="body"
-            value={this.state.body}
-            onChange={this.handleChange}
-          />
-          <input type="Submit" />
-        </form>
-    
-            {this.state.posts.map((post) => {
-              const { id, userId, title, body } = post;
-              return (
-                <Card key={id} className="my-3">
-                  <Card.Header as="h5">{id + "   " +  userId }</Card.Header>
-                  <Card.Body>
-                    <Card.Title>{title}</Card.Title>
-                    {/* <Card.Img variant="top" src={postpic} height="100px" /> */}
-                    <Card.Text>{body}</Card.Text>
+        <EditForm
+          submition={this.handleSubmit}
+          changes={this.handleChange}
+          userNames={this.userDetails}
+          {...this.state}
+        />
 
-                    <InputGroup className="mb-3">
-                      <Button
-                        variant="outline-secondary"
-                        onClick={() => this.selectPost(post)}
-                      >
-                        <i className="bi bi-pencil-square"></i>
-                      </Button>
-                      <Button variant="outline-secondary">
-                        <i className="bi bi-chat-right-text"></i>
-                      </Button>
-                      <Button
-                        variant="outline-secondary"
-                        onClick={() => this.deletePost(post.id)}
-                      >
-                        <i class="bi bi-trash"></i>
-                      </Button>
-                    </InputGroup>
-                  </Card.Body>
-                </Card>
-              );
-            })}
-         
+        {this.state.posts.map((post) => {
+          const { id, userId, title, body } = post;
+          return (
+            <Card key={id} className="my-3">
+              <Card.Header as="h5">{id + "   " + userId}</Card.Header>
+              <Card.Body>
+                <Card.Title>{title}</Card.Title>
+                {/* <Card.Img variant="top" src={postpic} height="100px" /> */}
+                <Card.Text>{body}</Card.Text>
+
+                <InputGroup className="mb-3">
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => this.selectPost(post)}
+                  >
+                    <i className="bi bi-pencil-square"></i>
+                  </Button>
+                  <Button variant="outline-secondary">
+                    <i className="bi bi-chat-right-text"></i>
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => this.deletePost(post.id)}
+                  >
+                    <i class="bi bi-trash"></i>
+                  </Button>
+                </InputGroup>
+              </Card.Body>
+            </Card>
+          );
+        })}
       </>
     );
   }
