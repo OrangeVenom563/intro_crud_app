@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
-import { Button, Card, InputGroup } from "react-bootstrap";
 
 import EditForm from "../../components/edit-form/edit-from.component";
+import PostCard from "../../components/post-card/post-card.component";
 
 const API_URL = "https://jsonplaceholder.typicode.com";
 const API_POST = API_URL + "/posts";
@@ -133,34 +133,8 @@ class PostApp extends React.Component {
         />
 
         {this.state.posts.map((post) => {
-          const { id, userId, title, body } = post;
           return (
-            <Card key={id} className="my-3">
-              <Card.Header as="h5">{id + "   " + userId}</Card.Header>
-              <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                {/* <Card.Img variant="top" src={postpic} height="100px" /> */}
-                <Card.Text>{body}</Card.Text>
-
-                <InputGroup className="mb-3">
-                  <Button
-                    variant="outline-secondary"
-                    onClick={() => this.selectPost(post)}
-                  >
-                    <i className="bi bi-pencil-square"></i>
-                  </Button>
-                  <Button variant="outline-secondary">
-                    <i className="bi bi-chat-right-text"></i>
-                  </Button>
-                  <Button
-                    variant="outline-secondary"
-                    onClick={() => this.deletePost(post.id)}
-                  >
-                    <i class="bi bi-trash"></i>
-                  </Button>
-                </InputGroup>
-              </Card.Body>
-            </Card>
+            <PostCard key={post.id} post={post} selectPost={this.selectPost} deletePost={this.deletePost}/>
           );
         })}
       </>

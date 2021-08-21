@@ -5,8 +5,8 @@ return(
     <form onSubmit={submition}>
           <label> UserName : </label>
           <select>
-            {userNames.map((detail) => {
-              return <option>{detail.name}</option>;
+            {userNames.map((detail,idx) => {
+              return <option key={idx}>{detail.name}</option>;
             })}
           </select>
           <label> UserID : </label>
